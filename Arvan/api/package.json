@@ -1,0 +1,22 @@
+{
+  "name": "emptysample",
+  "version": "1.0.0",
+  "description": "This is a empty sample to generate project without logic 4 now and develop it :)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ShamimShahraeeini",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShamimShahraeini/emptySample/issues"
+  },
+  "homepage": "https://github.com/ShamimShahraeini/emptySample#readme",
+  "dependencies": {
+    "ajv": "^6.12.6",
+    "ioredis": "^5.2.3",
+    "redis": "^4.3.1",
+    "semicolon-router": "^4.0.1",
+    "semicolon-server": "^4.0.1"
+  }
+}
