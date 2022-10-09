@@ -1,0 +1,16 @@
+version: "2"
+
+# Do not forget that the only available 
+# redis image is accessible with the following url:
+#  registry.gitlab.com/qio/standard/redis:latest
+
+services:
+  redis_limitter:
+    image: "registry.gitlab.com/qio/standard/redis:latest"
+    mem_limit: 30M
+    mem_reservation: 30M
+    # cpus: 0.7
+    # cpu_shares: 70
+    restart: always
+    ports:
+      - '6379:6379'
