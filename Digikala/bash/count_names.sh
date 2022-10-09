@@ -13,7 +13,7 @@ if [ -f "$1" ]; then
     # echo $input_file
     # awk 'BEGIN{c=0} //{c++} END{print "Count: ",c}' RS="[[:space:]]" $input_file
     count=$(cat $input_file | tr ',' ' ' | tr '|' ' ' | tr '$' ' ' | tr '!' ' ' | tr '  ' ' ' | tr '\\' ' ' | tr '\n' ' ' |  wc -w)
-    printf "Count: $count \n"
+    printf "Count: $count"
 else
     echo "input file required!"
 fi
