@@ -1,5 +1,5 @@
 #!/bin/sh
 
 # Enter commands to run your application
-
-pm2 start counterAPI.js --name counterAPI
+service redis-server start
+pm2 start --no-daemon counterAPI.js 
