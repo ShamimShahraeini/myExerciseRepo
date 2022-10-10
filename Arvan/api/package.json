@@ -4,6 +4,7 @@
   "description": "This is a empty sample to generate project without logic 4 now and develop it :)",
   "main": "index.js",
   "scripts": {
+    "start":"node counterAPI.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ShamimShahraeeini",
