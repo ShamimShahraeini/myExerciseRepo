@@ -1,0 +1,51 @@
+---
+
+##############################docker-compose
+- name: Tear down existing services (docker-compose down)
+  community.docker.docker_compose:
+    project_src: "{{ playbook_dir }}"
+    state: absent
+# ## TODO: get service name and container_name as variable or create a dynamic var from output
+- name: Create and start services (docker-compose up)
+  community.docker.docker_compose:
+    project_src: "{{ playbook_dir }}"
+    state: present
+  register: output
+
+# - debug: var=output
+# - name: test
+#   set_fact: 
+#     ip: "{{output.services.mysql|dict2items|json_query('[].value.networks.keys(@)')}}"
+
+
+#############################connection-dependencies
+- name: Set var == ip of docker contaire
+  set_fact: 
+    ip: "{{output.services.mysql|dict2items|map(attribute='value.networks')|list|first|dict2items|map(attribute='value.IPAddress')|list|first}}"
+
+##############################mysql-grants
+# TODO: check privilages error (priv parameter must be str or dict but <class 'list'> was passed)
+- name: Specify grants composed of more than one word
+  community.mysql.mysql_user:
+    login_host: "{{ip}}"
+    login_port: 3306
+    login_user: "root"
+    login_password: "qazwsx"
+    #login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{item.name}}"
+    host: "{{item.host}}"
+    password: "{{item.password}}"
+    priv: "{% for item2 in item.grants %}{{ item2 }}{% endfor %}"
+    check_implicit_admin: true
+    state: present
+  with_items: "{{ grants }}"
+  register: query_output
+
+- debug: var=query_output
+
+#################test
+# - debug: msg="{% for item2 in item.grants %}{{ item2 }}\{% endfor %}"
+#   with_items: "{{ grants }}"
+
+
+
